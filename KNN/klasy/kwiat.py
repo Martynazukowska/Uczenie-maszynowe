@@ -1,4 +1,5 @@
 
+
 class Kwiat:
     def __init__(self,sepal_length,sepal_width,petal_length,petal_width,klasa):
         self.sepal_length=sepal_length
