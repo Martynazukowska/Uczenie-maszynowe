@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
-from klasy.dzialania import KNN
+from klasy.dzialania2 import KNN
 import numpy as np
 
 
@@ -26,6 +26,7 @@ print(Tablica_pomylek[0][0])
 #Wszystko_Trening=[]
 Wszystko_Test=[]
 Wszystko_Walidacja=[]
+
 
 SL=[]
 SW=[]
