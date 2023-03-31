@@ -13,7 +13,7 @@ cmap=ListedColormap(['#FF0000','#00FF00','#0000FF'])
 # file_irys_trening, file_irys_test, file_irys_walidacja = trening_test_walidacja_split(file_irys,trening_size=0.6,test_size=0.2,random_state=1234)
 
 file_irys_trening=open("./IRYS/Trening.data","r+")
-file_irys_test=open("./IRYS/Test.data","r+")
+file_irys_test=open("./IRYS/Walidacyjny.data","r+")
 file_irys_walidacja=open("./IRYS/Walidacyjny.data","r+")
 
 #Trening
@@ -86,7 +86,7 @@ Wszystko_Walidacja=[SL,SW,PL,PW,klasa]
 
 
 
-knn=KNN(3)
+knn=KNN(2)
 
 knn.fit(Wszystko_Trening)
 Dane=[Wszystko_Test[0],Wszystko_Test[1],Wszystko_Test[2],Wszystko_Test[3]]
@@ -97,7 +97,11 @@ do_przewidzenia=knn.predict(Dane)
 knn.get_tablica_pomylek(do_przewidzenia,Wszystko_Test[4])
 knn.print_tablica_pomylek()
 
-acc=np.sum(do_przewidzenia==Wszystko_Test[4])/len(Wszystko_Test[4])
+print("\n")
+knn.Reszta_tablica_pomylek(do_przewidzenia,Wszystko_Test[4])
+print("\n")
+
+#acc=np.sum(do_przewidzenia==Wszystko_Test[4])/len(Wszystko_Test[4])
 
 
 

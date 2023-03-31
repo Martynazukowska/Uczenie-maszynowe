@@ -27,6 +27,14 @@ class KNN:
         # Iris-versicolor
         # Iris-virginica
         self.Tablica_pomylek=[[0,0,0],[0,0,0],[0,0,0]]
+        #czulosc
+        self.tpr=0
+        #swoistosc
+        self.tnr=0
+        #precyzja
+        self.precyzjaS=0
+        self.precyzjaVe=0
+        self.precyzjaVi=0
         #dokładność
         self.acc=0
 
@@ -126,5 +134,10 @@ class KNN:
         print(bcolors.BOLD+bcolors.FAIL+"  Iris-virginica "+bcolors.ENDC+"|       "+Vi0+"        |       "+Vi1+"        |       "+bcolors.FAIL+Vi2+bcolors.ENDC+"        |")
 
     def Reszta_tablica_pomylek(self,do_przewidzenia, zbior):
-            self.acc=np.sum(do_przewidzenia==zbior)/len(zbior)
+        
+
+        #self.acc=(self.Tablica_pomylek[0][0]+self.Tablica_pomylek[1][1]+self.Tablica_pomylek[2][2])/len(do_przewidzenia)
+        self.acc=np.sum(do_przewidzenia==zbior)/len(zbior)
+        print(self.acc)
+        
 
