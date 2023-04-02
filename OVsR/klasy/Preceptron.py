@@ -24,7 +24,7 @@ class Preceptron:
         #features=len(self.Dane)
 
         self.samples,self.features=X.shape
-    
+
         #z samyc zer
         self.wagi=np.zeros(self.features)
         self.cechy=0
@@ -44,8 +44,6 @@ class Preceptron:
                     update=self.lr*(_y[index]-y_predicted)
                     self.wagi+=update*x_i
                     self.cechy+=update
-
-
 
 
     def predict(self,X):
