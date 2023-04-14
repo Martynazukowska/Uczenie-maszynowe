@@ -11,6 +11,7 @@ class Preceptron:
         self.Dane=None
         self.Klasa=None
         self.Tablica_pomylek=[[0,0],[0,0]]
+        self.przed_sig=None
         
 
     def _unit_step_fun(self,x):
@@ -32,6 +33,7 @@ class Preceptron:
         #zapytaj się o funkcję
         #_y=np.array([1 if i>0 else 0 for i in y])
         _y=np.array([1 if i>0 else -1 for i in y])
+        self.przed_sig=np.array([1 if i>0 else -1 for i in y])
 
         #naucz się wag
         for _ in range(self.n):
@@ -50,28 +52,13 @@ class Preceptron:
         #iloczyn skalarny
         linear_output=np.dot(X,self.wagi)+self.cechy
         y_predicted=self._unit_step_fun(linear_output)
+        self.przed_sig=linear_output
+        print("HOP2 ",self.przed_sig)
         return y_predicted
 
-    def get_tablica_pomylek(self, do_przewidzenia,zbior):
-        a=0
-        for item in do_przewidzenia:
-            if do_przewidzenia[a]==-1:
-                if -1==zbior[a]:
-                    self.Tablica_pomylek[0][0]=self.Tablica_pomylek[0][0]+1
-                elif 1==zbior[a]:
-                    self.Tablica_pomylek[0][1]=self.Tablica_pomylek[0][1]+1
-                else:
-                    print("UWAGA")
-            elif do_przewidzenia[a]==1:
-                if -1==zbior[a]:
-                    self.Tablica_pomylek[1][0]=self.Tablica_pomylek[1][0]+1
-                elif 1==zbior[a]:
-                    self.Tablica_pomylek[1][1]=self.Tablica_pomylek[1][1]+1
-                else:
-                    print("UWAGA")
-            a=a+1
 
-        return self.Tablica_pomylek
+    def get_przed_sig(self,ktory):
+        return self.przed_sig[ktory]
 
 
 

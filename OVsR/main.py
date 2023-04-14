@@ -129,14 +129,17 @@ y_train_virgi[y_train_virgi=="Iris-virginica"] = 1
 #######################################################
 #zapytać się o versicolor
 
+print("S\n")
 Psetosa=Preceptron(learning_rate=0.01,n_iters=1000)
 Psetosa.fit(x_train,y_train_setosa)
 szukaneS=Psetosa.predict(x_test)
 
+print("V\n")
 
 Pvirgi=Preceptron(learning_rate=0.01,n_iters=1000)
 Pvirgi.fit(x_train,y_train_virgi)
 szukaneV=Pvirgi.predict(x_test)
+
 
 #############################################################
 #acc=np.sum(y_test_setosa==szukaneS)/len(y_test_setosa)
@@ -152,8 +155,10 @@ pom=len(szukaneS)
 
 for index in range(pom):
     if szukaneV[index]==1 and szukaneS[index]==1:
-        #zapytać się co w takim wypadku
-        szukane.append("blad")
+        if Psetosa.get_przed_sig(index)>Pvirgi.get_przed_sig(index):
+            szukane.append("Iris-setosa")
+        else:
+            szukane.append("Iris-virginica")
     elif szukaneV[index]==1:
         szukane.append("Iris-virginica")
     elif szukaneS[index]==1:
