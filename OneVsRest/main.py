@@ -59,6 +59,7 @@ x_train = zbior_trening[:, :len(zbior_trening[0])-1]
 y_train = zbior_trening[:, -1]
 y_train[y_train==0] = -1
 
+
 p=Preceptron(learning_rate=0.01,n_iters=1000)
 p.fit(x_train,y_train)
 szukane=p.predict(x_test)
