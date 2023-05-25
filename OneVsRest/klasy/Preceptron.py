@@ -36,7 +36,9 @@ class Preceptron:
         #naucz się wag
         for _ in range(self.n):
             for index,x_i in enumerate(X):
+
                 linear_output=np.dot(x_i,self.wagi)+self.cechy
+
                 y_predicted=np.sign(linear_output)
                 #y_predicted=self._unit_step_fun(linear_output)
                 # czy jest to potrzebne? 

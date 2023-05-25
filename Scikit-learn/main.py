@@ -7,7 +7,7 @@ import sklearn
 from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from matplotlib.colors import ListedColormap
 
@@ -82,6 +82,38 @@ y_train = zbior_trening[:, -1]
 
 X_train=x_train.astype(float)
 
+i=0
+plt.title("Dane testowe")
+plt.subplot(1, 2, 1)
+while i<len(y_test):
+    if y_test[i]=="Iris-setosa":
+        plt.plot(x_test[i][0], x_test[i][1], 'o', c='b')
+    elif y_test[i]=="Iris-versicolor":
+        plt.plot(x_test[i][0], x_test[i][1], 'o', c='r')
+    elif y_test[i]=="Iris-virginica":
+        plt.plot(x_test[i][0], x_test[i][1], 'o', c='g')
+    else:
+        print(y_test[i])
+    i=i+1
+i=0
+plt.legend(['Iris-virginica','Iris-versicolor','Iris-setosa'])
+plt.xlabel('Sepal length') 
+plt.ylabel('Sepal width') 
+plt.subplot(1, 2, 2)
+while i<len(y_test):
+    if y_test[i]=="Iris-setosa":
+        plt.plot(x_test[i][2], x_test[i][3], 'o', c='b')
+    elif y_test[i]=="Iris-versicolor":
+        plt.plot(x_test[i][2], x_test[i][3], 'o', c='r')
+    elif y_test[i]=="Iris-virginica":
+        plt.plot(x_test[i][2], x_test[i][3], 'o', c='g')
+    else:
+        print(y_test[i])
+    i=i+1
+plt.xlabel('Petal length') 
+plt.ylabel('Petal width') 
+plt.legend(['Iris-virginica','Iris-versicolor','Iris-setosa'])
+plt.show()
 print("model Multi-Layer Perceptron")
 
 print("\n")
@@ -168,13 +200,13 @@ Knn = KNeighborsClassifier(n_neighbors=3)
 # Trenowanie modelu
 Knn.fit(X_train, y_train)
 
-predict_test = Knn.predict(X_test)
+predict_test2 = Knn.predict(X_test)
 
-print_tablica_pomylek(confusion_matrix(y_test,predict_test))
+print_tablica_pomylek(confusion_matrix(y_test,predict_test2))
 #print(confusion_matrix(y_train,predict_train))
 print("\n")
 
-print(classification_report(y_test,predict_test))
+print(classification_report(y_test,predict_test2))
 
 # Testowanie modelu
 accuracy = Knn.score(X_test, y_test)
@@ -195,46 +227,42 @@ RTree = RandomForestClassifier(random_state=42)
 # Trenowanie modelu
 RTree.fit(X_train, y_train)
 
-predict_test = RTree.predict(X_test)
+predict_test3 = RTree.predict(X_test)
 
-print_tablica_pomylek(confusion_matrix(y_test,predict_test))
+print_tablica_pomylek(confusion_matrix(y_test,predict_test3))
 #print(confusion_matrix(y_train,predict_train))
 print("\n")
 
-print(classification_report(y_test,predict_test))
+print(classification_report(y_test,predict_test3))
 
 # Testowanie modelu
 accuracy = RTree.score(X_test, y_test)
 print("Dokładność klasyfikacji: {:.2f}%".format(accuracy*100))
 
 
-# print("\n")
+print("\n")
 
-# print("model Naive Bayes Classifier")
+print("model SVM")
 
-# print("\n")
+print("\n")
 
-# #mieszanie=bootstraping+agregacja=baging
+# Train the SVM model
+clf = SVC(kernel='linear', C=1, random_state=42)
+clf.fit(X_train, y_train)
 
-# # Tworzenie modelu LogisticRegression
+predict_test4 = clf.predict(X_test)
+
+print_tablica_pomylek(confusion_matrix(y_test,predict_test4))
+print("\n")
+print(classification_report(y_test,predict_test4))
+
+# Evaluate the performance of the model
+accuracy = clf.score(X_test, y_test)
+
+print("\n")
+print("Dokładność klasyfikacji: {:.2f}%".format(accuracy*100))
 
 
-# Ga = GaussianNB()
-
-# # Trenowanie modelu
-# Ga.fit(X_train, y_train)
-
-# predict_test = Ga.predict(X_test)
-
-# print_tablica_pomylek(confusion_matrix(y_test,predict_test))
-# #print(confusion_matrix(y_train,predict_train))
-# print("\n")
-
-# print(classification_report(y_test,predict_test))
-
-# # Testowanie modelu
-# accuracy = Ga.score(X_test, y_test)
-# print("Dokładność klasyfikacji: {:.2f}%".format(accuracy*100))
 
 
 
